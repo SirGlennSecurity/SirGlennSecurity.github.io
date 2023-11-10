@@ -1,11 +1,4 @@
----
-layout: single
-classes: wide
-title:  "Why preferring IPv4 over IPv6 does not fix IPv6 attacks"
-date:   2023-11-10 17:08:57 +0100
----
-
-
+### Why Preferring IPv4 over IPv6 does not stop the MITM6 attack
 
 If you have ever tried to fix the somewhat infamous IPv6 attack often known as [mitm6](https://blog.fox-it.com/2018/01/11/mitm6-compromising-ipv4-networks-via-ipv6/) then you have likely stumbled upon [Microsoft's guidance](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) to prefer IPv4 over IPv6 instead of outright disabling IPv6. This fails to stop attackers though, in fact, it doesn't even slow them down.
 
