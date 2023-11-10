@@ -12,13 +12,13 @@ If you have ever tried to fix the somewhat infamous IPv6 attack often known as [
 
 ## Overview
 
-As a brief reminder of how the attack works. An attacker obtains a rouge or compromised host on a subnet with Windows-based devices. These devices, by default, will attempt to find an IPv6 DHCP server. This DHCP6 server can also provide DNS settings or even only DNS settings through the use of a router advertisement[Confirm its RA] packet. The affected client now uses the provided IPv6 DNS server which either says that there is no IP address for that name or responds that they do have a DNS record, and it's the attacker's IP address. Presuming the attacker won the race condition with the normal DNS server, this causes the client to make its desired request to the server who can then ask the client to authenticate.
+As a brief reminder of how the attack works. An attacker obtains a rouge or compromised host on a subnet with Windows-based devices. These devices, by default, will attempt to find an IPv6 DHCP server. This DHCP6 server can also provide DNS settings or even only DNS settings through the use of a router advertisement  packet using RDNSS. The affected client now uses the provided IPv6 DNS server which either says that there is no IP address for that name or responds that they do have a DNS record, and it's the attacker's IP address. Presuming the attacker won the race condition with the normal DNS server, this causes the client to make its desired request to the server who can then ask the client to authenticate.
 
 So why doesn't Prefering IPv4 over IPv6 solve this issue? I mean, if we don't use IPv6 we won't use the attacker's machine as a DNS server, right?
 
 ## Technical details
 
-Preferring IPv4 over IPv6 refers to the [Default Address Selection for Internet Protocol version 6](https://www.ietf.org/rfc/rfc3484.txt) or rfc3484. This RFC describes two algorithms that help computers decide if they should initiate[italics] a connection via IPv6 or IPv4.
+Preferring IPv4 over IPv6 refers to the [Default Address Selection for Internet Protocol version 6](https://www.ietf.org/rfc/rfc3484.txt) or rfc3484. This RFC describes two algorithms that help computers decide if they should *initiate* a connection via IPv6 or IPv4.
 
 
 We can see the baseline weighting Windows gives when selecting an IPv6 or IPv4 address by running the command
@@ -33,7 +33,7 @@ if we change the value with Window's recommended command:
 
 and restart the device we can see the values change.
 
-![The Precedence of the IPv4 prefix, ::ffff:0:0/96 is changed to 1](/assets/img/IPv6/regWithIPv4-IPv6.PNG)
+![The Precedence of the IPv4 prefix, ::ffff:0:0/96 is changed to 1](/assets/IPv6/regWithIPv4-IPv6.PNG)
 
 You can find a list of what these prefixes mean in [RFC-6890](https://datatracker.ietf.org/doc/html/rfc6890#section-2.2.3)
 
@@ -41,7 +41,7 @@ The problem is this does not control if we prefer our DNSv6 server's answer over
 
 The attacker-provided DNS server has a couple of advantages in this race. First, browsers appear to prefer the IPv6 DNS server over the IPv4.
 
-![The DNS server with a IPv6 address gets a very small advantage by going first](exist PCAP image)
+![The DNS server with a IPv6 address gets a very small advantage by going first](/assets/IPv6/dnsrequestTimes.png)
 
 Second, the attacker has to be on the same subnet as the affected host due to the DHCPv6 requests being local subnet only. The DNS server might be both logically and physically further away.
 
