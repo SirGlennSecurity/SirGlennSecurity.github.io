@@ -25,7 +25,7 @@ We can see the baseline weighting Windows gives when selecting an IPv6 or IPv4 a
 
 `netsh interface ipv6 show prefixpolicies`
 
-![Here we can see the results of that command with the default windows settings](/assets/img/IPv6/regWithIPv6-IPv4.PNG)
+![Here we can see the results of that command with the default windows settings](/assets/IPv6/regWithIPv6-IPv4.PNG)
 
 if we change the value with Window's recommended command:
 
